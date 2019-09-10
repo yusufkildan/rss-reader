@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  NewsListTableViewController.swift
 //  rss-reader
 //
 //  Created by yusuf_kildan on 10.09.2019.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class NewsListTableViewController: BaseTableViewController {
 
     // MARK: - View's Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.red
+        title = String.localize("news_list_navigation_title")
     }
 }
 

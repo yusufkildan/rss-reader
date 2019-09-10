@@ -8,11 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		991E9CD1232820FE003A6981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9CD0232820FE003A6981 /* AppDelegate.swift */; };
-		991E9CD3232820FE003A6981 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9CD2232820FE003A6981 /* ViewController.swift */; };
+		991E9CD3232820FE003A6981 /* NewsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9CD2232820FE003A6981 /* NewsListTableViewController.swift */; };
 		991E9CD823282100003A6981 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 991E9CD723282100003A6981 /* Assets.xcassets */; };
 		991E9CDB23282100003A6981 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 991E9CD923282100003A6981 /* LaunchScreen.storyboard */; };
 		991E9CE623282100003A6981 /* rss_readerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9CE523282100003A6981 /* rss_readerTests.swift */; };
 		991E9CF123282100003A6981 /* rss_readerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9CF023282100003A6981 /* rss_readerUITests.swift */; };
+		991E9D092328242A003A6981 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D082328242A003A6981 /* BaseViewController.swift */; };
+		991E9D0B23282438003A6981 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D0A23282438003A6981 /* BaseTableViewController.swift */; };
+		991E9D0D23282444003A6981 /* BaseCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D0C23282444003A6981 /* BaseCollectionViewController.swift */; };
+		991E9D0F23282452003A6981 /* BaseNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D0E23282452003A6981 /* BaseNavigationViewController.swift */; };
+		991E9D112328245F003A6981 /* BaseWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D102328245F003A6981 /* BaseWebViewController.swift */; };
+		991E9D1323282546003A6981 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D1223282546003A6981 /* UIColor+Extension.swift */; };
+		991E9D1523282747003A6981 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D1423282747003A6981 /* UIFont+Extension.swift */; };
+		991E9D1823282A85003A6981 /* EmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D1723282A85003A6981 /* EmptyStateView.swift */; };
+		991E9D1A23282A9F003A6981 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D1923282A9F003A6981 /* UIView+Extension.swift */; };
+		991E9D1C23282AE1003A6981 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D1B23282AE1003A6981 /* Utils.swift */; };
+		991E9D2123282CC6003A6981 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 991E9D2323282CC6003A6981 /* Localizable.strings */; };
+		991E9D2623282CE1003A6981 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D2523282CE1003A6981 /* String+Extension.swift */; };
+		991E9D28232831AA003A6981 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D27232831AA003A6981 /* ReusableView.swift */; };
+		991E9D2A23283943003A6981 /* FeedSelectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D2923283943003A6981 /* FeedSelectionCollectionViewController.swift */; };
+		991E9D2C232839A1003A6981 /* NewsDetailWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D2B232839A1003A6981 /* NewsDetailWebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +50,7 @@
 /* Begin PBXFileReference section */
 		991E9CCD232820FE003A6981 /* rss-reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rss-reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		991E9CD0232820FE003A6981 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		991E9CD2232820FE003A6981 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		991E9CD2232820FE003A6981 /* NewsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListTableViewController.swift; sourceTree = "<group>"; };
 		991E9CD723282100003A6981 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		991E9CDA23282100003A6981 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		991E9CDC23282100003A6981 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,6 +60,23 @@
 		991E9CEC23282100003A6981 /* rss-readerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "rss-readerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		991E9CF023282100003A6981 /* rss_readerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rss_readerUITests.swift; sourceTree = "<group>"; };
 		991E9CF223282100003A6981 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		991E9D082328242A003A6981 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		991E9D0A23282438003A6981 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		991E9D0C23282444003A6981 /* BaseCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewController.swift; sourceTree = "<group>"; };
+		991E9D0E23282452003A6981 /* BaseNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationViewController.swift; sourceTree = "<group>"; };
+		991E9D102328245F003A6981 /* BaseWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseWebViewController.swift; sourceTree = "<group>"; };
+		991E9D1223282546003A6981 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		991E9D1423282747003A6981 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
+		991E9D1723282A85003A6981 /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
+		991E9D1923282A9F003A6981 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		991E9D1B23282AE1003A6981 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		991E9D1D23282CA4003A6981 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		991E9D2223282CC6003A6981 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		991E9D2423282CC8003A6981 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		991E9D2523282CE1003A6981 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		991E9D27232831AA003A6981 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
+		991E9D2923283943003A6981 /* FeedSelectionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSelectionCollectionViewController.swift; sourceTree = "<group>"; };
+		991E9D2B232839A1003A6981 /* NewsDetailWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailWebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +136,7 @@
 				991E9D0223282124003A6981 /* Storyboards */,
 				991E9D0523282157003A6981 /* Resources */,
 				991E9D042328214D003A6981 /* Support */,
+				991E9D1B23282AE1003A6981 /* Utils.swift */,
 			);
 			path = "rss-reader";
 			sourceTree = "<group>";
@@ -129,7 +162,10 @@
 		991E9CFE23282106003A6981 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				991E9CD2232820FE003A6981 /* ViewController.swift */,
+				991E9D0723282416003A6981 /* Common */,
+				991E9CD2232820FE003A6981 /* NewsListTableViewController.swift */,
+				991E9D2923283943003A6981 /* FeedSelectionCollectionViewController.swift */,
+				991E9D2B232839A1003A6981 /* NewsDetailWebViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -137,6 +173,7 @@
 		991E9CFF2328210D003A6981 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				991E9D1623282A79003A6981 /* Modular */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -167,6 +204,10 @@
 		991E9D032328212A003A6981 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				991E9D1223282546003A6981 /* UIColor+Extension.swift */,
+				991E9D1423282747003A6981 /* UIFont+Extension.swift */,
+				991E9D1923282A9F003A6981 /* UIView+Extension.swift */,
+				991E9D2523282CE1003A6981 /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -182,6 +223,7 @@
 		991E9D0523282157003A6981 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				991E9D1E23282CAA003A6981 /* Localizations */,
 				991E9CD723282100003A6981 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -190,8 +232,37 @@
 		991E9D06232822CC003A6981 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				991E9D27232831AA003A6981 /* ReusableView.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		991E9D0723282416003A6981 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				991E9D082328242A003A6981 /* BaseViewController.swift */,
+				991E9D0A23282438003A6981 /* BaseTableViewController.swift */,
+				991E9D0C23282444003A6981 /* BaseCollectionViewController.swift */,
+				991E9D0E23282452003A6981 /* BaseNavigationViewController.swift */,
+				991E9D102328245F003A6981 /* BaseWebViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		991E9D1623282A79003A6981 /* Modular */ = {
+			isa = PBXGroup;
+			children = (
+				991E9D1723282A85003A6981 /* EmptyStateView.swift */,
+			);
+			path = Modular;
+			sourceTree = "<group>";
+		};
+		991E9D1E23282CAA003A6981 /* Localizations */ = {
+			isa = PBXGroup;
+			children = (
+				991E9D2323282CC6003A6981 /* Localizable.strings */,
+			);
+			path = Localizations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +351,7 @@
 			knownRegions = (
 				en,
 				Base,
+				tr,
 			);
 			mainGroup = 991E9CC4232820FE003A6981;
 			productRefGroup = 991E9CCE232820FE003A6981 /* Products */;
@@ -299,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				991E9CDB23282100003A6981 /* LaunchScreen.storyboard in Resources */,
+				991E9D2123282CC6003A6981 /* Localizable.strings in Resources */,
 				991E9CD823282100003A6981 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,8 +397,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				991E9CD3232820FE003A6981 /* ViewController.swift in Sources */,
+				991E9D2A23283943003A6981 /* FeedSelectionCollectionViewController.swift in Sources */,
+				991E9D1A23282A9F003A6981 /* UIView+Extension.swift in Sources */,
+				991E9CD3232820FE003A6981 /* NewsListTableViewController.swift in Sources */,
 				991E9CD1232820FE003A6981 /* AppDelegate.swift in Sources */,
+				991E9D1823282A85003A6981 /* EmptyStateView.swift in Sources */,
+				991E9D0B23282438003A6981 /* BaseTableViewController.swift in Sources */,
+				991E9D28232831AA003A6981 /* ReusableView.swift in Sources */,
+				991E9D112328245F003A6981 /* BaseWebViewController.swift in Sources */,
+				991E9D2623282CE1003A6981 /* String+Extension.swift in Sources */,
+				991E9D0F23282452003A6981 /* BaseNavigationViewController.swift in Sources */,
+				991E9D092328242A003A6981 /* BaseViewController.swift in Sources */,
+				991E9D2C232839A1003A6981 /* NewsDetailWebViewController.swift in Sources */,
+				991E9D1523282747003A6981 /* UIFont+Extension.swift in Sources */,
+				991E9D0D23282444003A6981 /* BaseCollectionViewController.swift in Sources */,
+				991E9D1323282546003A6981 /* UIColor+Extension.swift in Sources */,
+				991E9D1C23282AE1003A6981 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,8 +452,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				991E9CDA23282100003A6981 /* Base */,
+				991E9D1D23282CA4003A6981 /* tr */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		991E9D2323282CC6003A6981 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				991E9D2223282CC6003A6981 /* en */,
+				991E9D2423282CC8003A6981 /* tr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -376,6 +473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -437,6 +535,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

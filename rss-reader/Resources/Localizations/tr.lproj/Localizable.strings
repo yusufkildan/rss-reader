@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  rss-reader
+
+  Created by yusuf_kildan on 10.09.2019.
+  Copyright © 2019 Yusuf Kıldan. All rights reserved.
+*/
+
+"unknown_error_description" = "Bilinmeyen hata oluştu";
+"retry" = "TEKRAR DENE";
+"news_list_navigation_title" = "SON HABERLER";
