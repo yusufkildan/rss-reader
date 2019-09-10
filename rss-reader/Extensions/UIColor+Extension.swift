@@ -12,6 +12,7 @@ struct ColorPalette {
     struct Primary {
         static let shadow = UIColor.black
         static let tint = UIColor.tundora
+        static let blue = UIColor.blueRibbon
         
         struct Light {
             static let text = UIColor.doveGray

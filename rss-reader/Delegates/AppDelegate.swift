@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
-        window.rootViewController = BaseNavigationController(rootViewController: NewsListTableViewController())
+        window.rootViewController = BaseNavigationController(rootViewController: FeedSelectionCollectionViewController())
         window.makeKeyAndVisible()
 
         return true

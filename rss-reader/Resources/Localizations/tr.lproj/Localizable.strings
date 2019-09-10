@@ -9,3 +9,5 @@
 "unknown_error_description" = "Bilinmeyen hata oluştu";
 "retry" = "TEKRAR DENE";
 "news_list_navigation_title" = "SON HABERLER";
+"feed_selection_navigation_title" = "FEED SEÇ";
+"continue" = "DEVAM ET";

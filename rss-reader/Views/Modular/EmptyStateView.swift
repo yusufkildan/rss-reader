@@ -93,10 +93,10 @@ class EmptyStateView: UIView {
         iconImageView.contentMode = UIView.ContentMode.scaleAspectFit
         iconImageView.isHidden = true
         
-        actionButton = UIButton(type: UIButton.ButtonType.system)
+        actionButton = OverlayButton(type: UIButton.ButtonType.system)
         actionButton.translatesAutoresizingMaskIntoConstraints = false
-        actionButton.setBackgroundImage(UIImage(named: "buttonBackgroundBlue"),
-                                        for: UIControl.State.normal)
+        actionButton.titleLabel?.font = UIFont.avenirNextBoldFont(withSize: 18.0)
+
         actionButton.isHidden = true
         actionButton.setTitleColor(ColorPalette.Secondary.Light.text, for: UIControl.State.normal)
         actionButton.titleLabel?.font = UIFont.avenirNextBoldFont(withSize: 18.0)
@@ -125,17 +125,7 @@ class EmptyStateView: UIView {
                                                    constant: -8.0).isActive = true
         containerStackView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        actionButton.addSketchShadow(color: ColorPalette.Secondary.shadow,
-                                     alpha: 0.39,
-                                     x: 0.0,
-                                     y: 6.0,
-                                     blur: 12.0,
-                                     spread: 0.0)
-    }
-    
+
     // MARK: - Actions
     
     @objc private func actionButtonTapped(_ button: UIButton) {

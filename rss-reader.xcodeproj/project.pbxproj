@@ -28,6 +28,10 @@
 		991E9D28232831AA003A6981 /* ReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D27232831AA003A6981 /* ReusableView.swift */; };
 		991E9D2A23283943003A6981 /* FeedSelectionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D2923283943003A6981 /* FeedSelectionCollectionViewController.swift */; };
 		991E9D2C232839A1003A6981 /* NewsDetailWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D2B232839A1003A6981 /* NewsDetailWebViewController.swift */; };
+		991E9D3023283C5C003A6981 /* RSSFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D2F23283C5C003A6981 /* RSSFeed.swift */; };
+		991E9D3223283DC1003A6981 /* FeedSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D3123283DC1003A6981 /* FeedSelectionCollectionViewCell.swift */; };
+		991E9D3523283E36003A6981 /* FeedSelectionCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D3423283E36003A6981 /* FeedSelectionCollectionViewLayout.swift */; };
+		991E9D3723284AF1003A6981 /* OverlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D3623284AF1003A6981 /* OverlayButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +81,10 @@
 		991E9D27232831AA003A6981 /* ReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableView.swift; sourceTree = "<group>"; };
 		991E9D2923283943003A6981 /* FeedSelectionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSelectionCollectionViewController.swift; sourceTree = "<group>"; };
 		991E9D2B232839A1003A6981 /* NewsDetailWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsDetailWebViewController.swift; sourceTree = "<group>"; };
+		991E9D2F23283C5C003A6981 /* RSSFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RSSFeed.swift; sourceTree = "<group>"; };
+		991E9D3123283DC1003A6981 /* FeedSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		991E9D3423283E36003A6981 /* FeedSelectionCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSelectionCollectionViewLayout.swift; sourceTree = "<group>"; };
+		991E9D3623284AF1003A6981 /* OverlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +139,7 @@
 				991E9CFF2328210D003A6981 /* Views */,
 				991E9CFE23282106003A6981 /* Controllers */,
 				991E9D032328212A003A6981 /* Extensions */,
+				991E9D3323283E25003A6981 /* Layouts */,
 				991E9D06232822CC003A6981 /* Protocols */,
 				991E9D0123282119003A6981 /* Delegates */,
 				991E9D0223282124003A6981 /* Storyboards */,
@@ -173,6 +182,8 @@
 		991E9CFF2328210D003A6981 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				991E9D2E23283B08003A6981 /* TableViewCells */,
+				991E9D2D23283AFF003A6981 /* CollectionViewCells */,
 				991E9D1623282A79003A6981 /* Modular */,
 			);
 			path = Views;
@@ -181,6 +192,7 @@
 		991E9D0023282113003A6981 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				991E9D2F23283C5C003A6981 /* RSSFeed.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -253,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				991E9D1723282A85003A6981 /* EmptyStateView.swift */,
+				991E9D3623284AF1003A6981 /* OverlayButton.swift */,
 			);
 			path = Modular;
 			sourceTree = "<group>";
@@ -263,6 +276,29 @@
 				991E9D2323282CC6003A6981 /* Localizable.strings */,
 			);
 			path = Localizations;
+			sourceTree = "<group>";
+		};
+		991E9D2D23283AFF003A6981 /* CollectionViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				991E9D3123283DC1003A6981 /* FeedSelectionCollectionViewCell.swift */,
+			);
+			path = CollectionViewCells;
+			sourceTree = "<group>";
+		};
+		991E9D2E23283B08003A6981 /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TableViewCells;
+			sourceTree = "<group>";
+		};
+		991E9D3323283E25003A6981 /* Layouts */ = {
+			isa = PBXGroup;
+			children = (
+				991E9D3423283E36003A6981 /* FeedSelectionCollectionViewLayout.swift */,
+			);
+			path = Layouts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,12 +436,16 @@
 				991E9D2A23283943003A6981 /* FeedSelectionCollectionViewController.swift in Sources */,
 				991E9D1A23282A9F003A6981 /* UIView+Extension.swift in Sources */,
 				991E9CD3232820FE003A6981 /* NewsListTableViewController.swift in Sources */,
+				991E9D3223283DC1003A6981 /* FeedSelectionCollectionViewCell.swift in Sources */,
+				991E9D3023283C5C003A6981 /* RSSFeed.swift in Sources */,
 				991E9CD1232820FE003A6981 /* AppDelegate.swift in Sources */,
 				991E9D1823282A85003A6981 /* EmptyStateView.swift in Sources */,
 				991E9D0B23282438003A6981 /* BaseTableViewController.swift in Sources */,
 				991E9D28232831AA003A6981 /* ReusableView.swift in Sources */,
 				991E9D112328245F003A6981 /* BaseWebViewController.swift in Sources */,
 				991E9D2623282CE1003A6981 /* String+Extension.swift in Sources */,
+				991E9D3523283E36003A6981 /* FeedSelectionCollectionViewLayout.swift in Sources */,
+				991E9D3723284AF1003A6981 /* OverlayButton.swift in Sources */,
 				991E9D0F23282452003A6981 /* BaseNavigationViewController.swift in Sources */,
 				991E9D092328242A003A6981 /* BaseViewController.swift in Sources */,
 				991E9D2C232839A1003A6981 /* NewsDetailWebViewController.swift in Sources */,
