@@ -18,7 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
-        window.rootViewController = BaseNavigationController(rootViewController: FeedSelectionCollectionViewController())
+
+        let rootViewController: BaseNavigationController
+        if UserDefaultsManager.hasSelectedFeed {
+            rootViewController = BaseNavigationController(rootViewController: NewsListTableViewController())
+        } else {
+            rootViewController = BaseNavigationController(rootViewController: FeedSelectionCollectionViewController())
+        }
+
+        window.rootViewController = rootViewController
         window.makeKeyAndVisible()
 
         return true

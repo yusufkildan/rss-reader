@@ -32,6 +32,8 @@
 		991E9D3223283DC1003A6981 /* FeedSelectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D3123283DC1003A6981 /* FeedSelectionCollectionViewCell.swift */; };
 		991E9D3523283E36003A6981 /* FeedSelectionCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D3423283E36003A6981 /* FeedSelectionCollectionViewLayout.swift */; };
 		991E9D3723284AF1003A6981 /* OverlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D3623284AF1003A6981 /* OverlayButton.swift */; };
+		99268A9D2329757C00E4C158 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99268A9C2329757C00E4C158 /* PersistanceManager.swift */; };
+		994ABD0D2329803B00ACD66D /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994ABD0C2329803B00ACD66D /* UserDefaultsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,8 @@
 		991E9D3123283DC1003A6981 /* FeedSelectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSelectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		991E9D3423283E36003A6981 /* FeedSelectionCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSelectionCollectionViewLayout.swift; sourceTree = "<group>"; };
 		991E9D3623284AF1003A6981 /* OverlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayButton.swift; sourceTree = "<group>"; };
+		99268A9C2329757C00E4C158 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		994ABD0C2329803B00ACD66D /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +139,7 @@
 		991E9CCF232820FE003A6981 /* rss-reader */ = {
 			isa = PBXGroup;
 			children = (
+				99268A9B2329755D00E4C158 /* Managers */,
 				991E9D0023282113003A6981 /* Models */,
 				991E9CFF2328210D003A6981 /* Views */,
 				991E9CFE23282106003A6981 /* Controllers */,
@@ -301,6 +306,15 @@
 			path = Layouts;
 			sourceTree = "<group>";
 		};
+		99268A9B2329755D00E4C158 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				99268A9C2329757C00E4C158 /* PersistanceManager.swift */,
+				994ABD0C2329803B00ACD66D /* UserDefaultsManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -437,8 +451,10 @@
 				991E9D1A23282A9F003A6981 /* UIView+Extension.swift in Sources */,
 				991E9CD3232820FE003A6981 /* NewsListTableViewController.swift in Sources */,
 				991E9D3223283DC1003A6981 /* FeedSelectionCollectionViewCell.swift in Sources */,
+				994ABD0D2329803B00ACD66D /* UserDefaultsManager.swift in Sources */,
 				991E9D3023283C5C003A6981 /* RSSFeed.swift in Sources */,
 				991E9CD1232820FE003A6981 /* AppDelegate.swift in Sources */,
+				99268A9D2329757C00E4C158 /* PersistanceManager.swift in Sources */,
 				991E9D1823282A85003A6981 /* EmptyStateView.swift in Sources */,
 				991E9D0B23282438003A6981 /* BaseTableViewController.swift in Sources */,
 				991E9D28232831AA003A6981 /* ReusableView.swift in Sources */,

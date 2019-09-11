@@ -10,9 +10,18 @@ import UIKit
 
 class FeedSelectionCollectionViewController: BaseCollectionViewController {
 
-    private let feeds = RSSFeed.getFeeds()
+    private var feeds: [RSSFeed] = []
 
     private var actionButton: OverlayButton!
+
+    private var hasSelectedFeed: Bool {
+        if let indexPaths = collectionView.indexPathsForSelectedItems,
+            indexPaths.count > 0 {
+            return true
+        } else {
+            return false
+        }
+    }
 
     // MARK: - View's Lifecycle
 
@@ -42,6 +51,36 @@ class FeedSelectionCollectionViewController: BaseCollectionViewController {
         actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                              constant: -12.0).isActive = true
 
+        loadData(withRefresh: true)
+    }
+
+    // MARK: - Load Data
+
+    override func loadData(withRefresh refresh: Bool) {
+        if PersistanceManager.fileExists(.feeds) {
+            feeds = PersistanceManager.retrieve(.feeds, as: [RSSFeed].self)
+        } else {
+            feeds = [RSSFeed(id: 1, name: "CBS News", url: "https://www.cbsnews.com/latest/rss/technology"),
+                     RSSFeed(id: 2, name: "New York Post", url: "https://nypost.com/living/feed/"),
+                     RSSFeed(id: 3, name: "The Guardian", url: "https://www.theguardian.com/uk/sport/rss"),
+                     RSSFeed(id: 4, name: "Wired", url: "https://www.wired.com/feed/category/culture/latest/rss"),
+                     RSSFeed(id: 5, name: "Washington Post", url: "http://feeds.washingtonpost.com/rss/national"),
+                     RSSFeed(id: 6, name: "CNN", url: "http://rss.cnn.com/rss/edition_world.rss"),
+                     RSSFeed(id: 7, name: "ABC News", url: "https://abcnews.go.com/abcnews/entertainmentheadlines"),
+                     RSSFeed(id: 8, name: "Mashable", url: "https://mashable.com/entertainment/rss/"),
+                     RSSFeed(id: 9, name: "TIME", url: "https://feeds2.feedburner.com/timeblogs/keepingscore")]
+        }
+
+        collectionView.reloadData()
+
+        for (index, feed) in feeds.enumerated() {
+            if feed.isSelected {
+                collectionView.selectItem(at: IndexPath(item: index, section: 0),
+                                          animated: false,
+                                          scrollPosition: UICollectionView.ScrollPosition.centeredVertically)
+            }
+        }
+
         updateInterface()
     }
 
@@ -50,21 +89,20 @@ class FeedSelectionCollectionViewController: BaseCollectionViewController {
     private func configure(FeedSelectionCollectionViewCell cell: FeedSelectionCollectionViewCell,
                            withIndexPath indexPath: IndexPath) {
         let feed = feeds[indexPath.item]
-
         cell.title = feed.name
     }
 
     // MARK: - Actions
 
     @objc private func actionButtonTapped(_ button: UIButton) {
-
+        PersistanceManager.persist(feeds, as: .feeds)
+        UserDefaultsManager.hasSelectedFeed = hasSelectedFeed
     }
 
     // MARK: - Helpers
 
     private func updateInterface() {
-        if let indexPaths = collectionView.indexPathsForSelectedItems,
-            indexPaths.count > 0 {
+        if hasSelectedFeed {
             actionButton.isEnabled = true
         } else {
             actionButton.isEnabled = false
@@ -78,11 +116,15 @@ extension FeedSelectionCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView,
                                  didSelectItemAt indexPath: IndexPath) {
         updateInterface()
+        let feed = feeds[indexPath.item]
+        feed.isSelected = true
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         didDeselectItemAt indexPath: IndexPath) {
         updateInterface()
+        let feed = feeds[indexPath.item]
+        feed.isSelected = false
     }
 }
 
