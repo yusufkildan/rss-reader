@@ -34,6 +34,8 @@
 		991E9D3723284AF1003A6981 /* OverlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D3623284AF1003A6981 /* OverlayButton.swift */; };
 		99268A9D2329757C00E4C158 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99268A9C2329757C00E4C158 /* PersistanceManager.swift */; };
 		994ABD0D2329803B00ACD66D /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994ABD0C2329803B00ACD66D /* UserDefaultsManager.swift */; };
+		994ABD0F232985D400ACD66D /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994ABD0E232985D400ACD66D /* NewsListTableViewCell.swift */; };
+		994ABD1123298E1100ACD66D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994ABD1023298E1100ACD66D /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,8 @@
 		991E9D3623284AF1003A6981 /* OverlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayButton.swift; sourceTree = "<group>"; };
 		99268A9C2329757C00E4C158 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
 		994ABD0C2329803B00ACD66D /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		994ABD0E232985D400ACD66D /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
+		994ABD1023298E1100ACD66D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +275,7 @@
 			children = (
 				991E9D1723282A85003A6981 /* EmptyStateView.swift */,
 				991E9D3623284AF1003A6981 /* OverlayButton.swift */,
+				994ABD1023298E1100ACD66D /* CardView.swift */,
 			);
 			path = Modular;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 		991E9D2E23283B08003A6981 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
+				994ABD0E232985D400ACD66D /* NewsListTableViewCell.swift */,
 			);
 			path = TableViewCells;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 				991E9D1A23282A9F003A6981 /* UIView+Extension.swift in Sources */,
 				991E9CD3232820FE003A6981 /* NewsListTableViewController.swift in Sources */,
 				991E9D3223283DC1003A6981 /* FeedSelectionCollectionViewCell.swift in Sources */,
+				994ABD0F232985D400ACD66D /* NewsListTableViewCell.swift in Sources */,
 				994ABD0D2329803B00ACD66D /* UserDefaultsManager.swift in Sources */,
 				991E9D3023283C5C003A6981 /* RSSFeed.swift in Sources */,
 				991E9CD1232820FE003A6981 /* AppDelegate.swift in Sources */,
@@ -468,6 +475,7 @@
 				991E9D1523282747003A6981 /* UIFont+Extension.swift in Sources */,
 				991E9D0D23282444003A6981 /* BaseCollectionViewController.swift in Sources */,
 				991E9D1323282546003A6981 /* UIColor+Extension.swift in Sources */,
+				994ABD1123298E1100ACD66D /* CardView.swift in Sources */,
 				991E9D1C23282AE1003A6981 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

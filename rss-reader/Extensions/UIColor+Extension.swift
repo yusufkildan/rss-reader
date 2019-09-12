@@ -29,6 +29,7 @@ struct ColorPalette {
 
         struct Light {
             static let text = UIColor.white
+            static let background = UIColor.gallery
         }
     }
 }
@@ -66,5 +67,9 @@ private extension UIColor {
 
     static var doveGray: UIColor {
         return UIColor(hexString: "#6B6B6B")
+    }
+
+    static var gallery: UIColor {
+        return UIColor(hexString: "#EEEEEE")
     }
 }
