@@ -9,11 +9,11 @@
 import UIKit
 
 class FeedSelectionCollectionViewController: BaseCollectionViewController {
-
+    
     private var feeds: [RSSFeed] = []
-
+    
     private var actionButton: OverlayButton!
-
+    
     private var hasSelectedFeed: Bool {
         if let indexPaths = collectionView.indexPathsForSelectedItems,
             indexPaths.count > 0 {
@@ -22,17 +22,17 @@ class FeedSelectionCollectionViewController: BaseCollectionViewController {
             return false
         }
     }
-
+    
     // MARK: - View's Lifecycle
-
+    
     override func viewDidLoad() {
         collectionViewLayout = FeedSelectionCollectionViewLayout()
         super.viewDidLoad()
         title = String.localize("feed_selection_navigation_title")
-
+        
         collectionView.allowsMultipleSelection = true
         register(cell: FeedSelectionCollectionViewCell())
-
+        
         actionButton = OverlayButton(type: UIButton.ButtonType.system)
         actionButton.translatesAutoresizingMaskIntoConstraints = false
         actionButton.titleLabel?.font = UIFont.avenirNextBoldFont(withSize: 18.0)
@@ -40,9 +40,9 @@ class FeedSelectionCollectionViewController: BaseCollectionViewController {
         actionButton.addTarget(self,
                                action: #selector(actionButtonTapped(_:)),
                                for: UIControl.Event.touchUpInside)
-
+        
         view.addSubview(actionButton)
-
+        
         actionButton.heightAnchor.constraint(equalToConstant: 50.0).isActive = true
         actionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor,
                                               constant: 30.0).isActive = true
@@ -50,12 +50,12 @@ class FeedSelectionCollectionViewController: BaseCollectionViewController {
                                                constant: -30.0).isActive = true
         actionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                              constant: -12.0).isActive = true
-
+        
         loadData(withRefresh: true)
     }
-
+    
     // MARK: - Load Data
-
+    
     override func loadData(withRefresh refresh: Bool) {
         if PersistanceManager.fileExists(.feeds) {
             feeds = PersistanceManager.retrieve(.feeds, as: [RSSFeed].self)
@@ -70,9 +70,9 @@ class FeedSelectionCollectionViewController: BaseCollectionViewController {
                      RSSFeed(id: 8, name: "Mashable", url: "https://mashable.com/entertainment/rss/"),
                      RSSFeed(id: 9, name: "TIME", url: "https://feeds2.feedburner.com/timeblogs/keepingscore")]
         }
-
+        
         collectionView.reloadData()
-
+        
         for (index, feed) in feeds.enumerated() {
             if feed.isSelected {
                 collectionView.selectItem(at: IndexPath(item: index, section: 0),
@@ -80,27 +80,34 @@ class FeedSelectionCollectionViewController: BaseCollectionViewController {
                                           scrollPosition: UICollectionView.ScrollPosition.centeredVertically)
             }
         }
-
+        
         updateInterface()
     }
-
+    
     // MARK: - Configure
-
+    
     private func configure(FeedSelectionCollectionViewCell cell: FeedSelectionCollectionViewCell,
                            withIndexPath indexPath: IndexPath) {
         let feed = feeds[indexPath.item]
         cell.title = feed.name
     }
-
+    
     // MARK: - Actions
-
+    
     @objc private func actionButtonTapped(_ button: UIButton) {
         PersistanceManager.persist(feeds, as: .feeds)
         UserDefaultsManager.hasSelectedFeed = hasSelectedFeed
+        
+        if isPresentedModally() {
+            dismiss(animated: true, completion: nil)
+        } else {
+            let viewController = BaseNavigationController(rootViewController: NewsListTableViewController())
+            (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController = viewController
+        }
     }
-
+    
     // MARK: - Helpers
-
+    
     private func updateInterface() {
         if hasSelectedFeed {
             actionButton.isEnabled = true
@@ -119,7 +126,7 @@ extension FeedSelectionCollectionViewController {
         let feed = feeds[indexPath.item]
         feed.isSelected = true
     }
-
+    
     func collectionView(_ collectionView: UICollectionView,
                         didDeselectItemAt indexPath: IndexPath) {
         updateInterface()
@@ -134,19 +141,19 @@ extension FeedSelectionCollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView,
                                  numberOfItemsInSection section: Int) -> Int {
         return feeds.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedSelectionCollectionViewCell.reuseIdentifier,
                                                       for: indexPath) as! FeedSelectionCollectionViewCell
-
+        
         configure(FeedSelectionCollectionViewCell: cell, withIndexPath: indexPath)
-
+        
         return cell
     }
 }

@@ -375,4 +375,12 @@ class BaseViewController: UIViewController {
             loadData(withRefresh: true)
         }
     }
+
+    // MARK: - Other Methods
+
+    func isPresentedModally() -> Bool {
+        return presentingViewController != nil ||
+            navigationController?.presentingViewController?.presentedViewController === navigationController ||
+            tabBarController?.presentingViewController is UITabBarController
+    }
 }
