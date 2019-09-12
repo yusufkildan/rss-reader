@@ -20,6 +20,8 @@ class NewsListTableViewController: BaseTableViewController {
         return button
     }()
 
+    private var feedItems: [FeeedItem] = []
+
     // MARK: - View's Lifecycle
     
     override func viewDidLoad() {
@@ -28,15 +30,61 @@ class NewsListTableViewController: BaseTableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addFeedButton)
 
         register(cell: NewsListTableViewCell())
+        loadData(withRefresh: true)
+    }
+
+    // MARK: - Load Data
+
+    override func loadData(withRefresh refresh: Bool) {
+        super.loadData(withRefresh: refresh)
+        let selectedFeeds = PersistanceManager.retrieve(File.feeds, as: [RSSFeed].self).filter { $0.isSelected }
+        let dispatchGroup = DispatchGroup()
+
+        var errorOccured = false
+
+        selectedFeeds.forEach {
+            let parser = RSSParser()
+            let request = URLRequest(url: URL(string: $0.url)!)
+            dispatchGroup.enter()
+            parser.parseFor(request: request) { (feedInfo, error) in
+                if let feedInfo = feedInfo {
+                    self.feedItems += feedInfo.items
+                } else if let _ = error {
+                    errorOccured = true
+                }
+                dispatchGroup.leave()
+            }
+        }
+
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            if errorOccured {
+                self.updateControllerState(withState: ControllerState.error)
+            } else {
+                self.updateControllerState(withState: ControllerState.none)
+            }
+
+            self.tableView.reloadData()
+        }
     }
 
     // MARK: - Configure
 
     private func configure(NewsListTableViewCell cell: NewsListTableViewCell,
                            withIndexPath indexPath: IndexPath) {
-        // TODO: - Remove Dummy Data
-        cell.title = "Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Sed posuere consectetur est at lobortis."
-        cell.publishInfo = "Porta Vulputate Cras"
+        if indexPath.row >= feedItems.count {
+            return
+        }
+
+        let item = feedItems[indexPath.row]
+        if let title = item.title {
+            cell.title = title
+        } else {
+            cell.title = "-"
+        }
+
+        if let x = item.content {
+            cell.publishInfo = x
+        }
     }
 
     // MARK: - Actions
@@ -75,7 +123,7 @@ extension NewsListTableViewController {
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return feedItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
