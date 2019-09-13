@@ -26,7 +26,7 @@ enum ElementName: String {
 class RSSParser: NSObject {
 
     var completionHandler: ((FeedInfo?, Error?) -> Void)?
-    var currentItem: FeeedItem?
+    var currentItem: FeedItem?
     var feed = FeedInfo()
     var currentElement = ""
 
@@ -72,7 +72,7 @@ extension RSSParser: XMLParserDelegate {
                 qualifiedName qName: String?,
                 attributes attributeDict: [String : String] = [:]) {
         if elementName == ElementName.item.rawValue {
-            currentItem = FeeedItem()
+            currentItem = FeedItem()
         }
 
         currentElement = ""

@@ -9,7 +9,7 @@
 import Foundation
 
 class FeedInfo: Codable {
-    var items: [FeeedItem] = []
+    var items: [FeedItem] = []
     var title: String?
     var link: URL?
     var description: String?

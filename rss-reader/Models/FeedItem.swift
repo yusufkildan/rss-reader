@@ -1,5 +1,5 @@
 //
-//  FeeedItem.swift
+//  FeedItem.swift
 //  rss-reader
 //
 //  Created by yusuf_kildan on 12.09.2019.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class FeeedItem: Codable {
+class FeedItem: Codable {
     var title: String?
     var link: URL?
     var guid: String?

@@ -26,11 +26,11 @@ class NewsListTableViewController: BaseTableViewController {
         return searchBar
     }()
 
-    private var feedItems: [FeeedItem] = []
-    private var filteredItems: [FeeedItem] = []
+    private var feedItems: [FeedItem] = []
+    private var filteredItems: [FeedItem] = []
     private var isSearching = false
 
-    private var items: [FeeedItem] {
+    private var items: [FeedItem] {
         if isSearching {
             return filteredItems
         } else {
@@ -196,7 +196,7 @@ extension NewsListTableViewController: UISearchBarDelegate {
     }
 
     func filterNews(_ searchText: String) {
-        filteredItems = feedItems.filter({ (item: FeeedItem) -> Bool in
+        filteredItems = feedItems.filter({ (item: FeedItem) -> Bool in
             if let title = item.title {
                 let match = title.range(of: searchText,
                                         options: NSString.CompareOptions.caseInsensitive)
