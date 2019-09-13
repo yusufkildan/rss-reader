@@ -20,7 +20,23 @@ class NewsListTableViewController: BaseTableViewController {
         return button
     }()
 
+    private lazy var searchBar: SearchBar = {
+        let searchBar: SearchBar = SearchBar(frame: CGRect(x: 0.0, y: 16.0, width: Utils.screenWidth - 24.0, height: 60.0))
+        searchBar.delegate = self
+        return searchBar
+    }()
+
     private var feedItems: [FeeedItem] = []
+    private var filteredItems: [FeeedItem] = []
+    private var isSearching = false
+
+    private var items: [FeeedItem] {
+        if isSearching {
+            return filteredItems
+        } else {
+            return feedItems
+        }
+    }
 
     // MARK: - View's Lifecycle
     
@@ -30,6 +46,7 @@ class NewsListTableViewController: BaseTableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addFeedButton)
 
         register(cell: NewsListTableViewCell())
+        tableView.tableHeaderView = searchBar
         loadData(withRefresh: true)
     }
 
@@ -49,6 +66,11 @@ class NewsListTableViewController: BaseTableViewController {
 
     override func loadData(withRefresh refresh: Bool) {
         super.loadData(withRefresh: refresh)
+
+        if refresh {
+            feedItems = []
+        }
+
         let selectedFeeds = PersistanceManager.retrieve(File.feeds, as: [RSSFeed].self).filter { $0.isSelected }
         let dispatchGroup = DispatchGroup()
 
@@ -84,19 +106,15 @@ class NewsListTableViewController: BaseTableViewController {
 
     private func configure(NewsListTableViewCell cell: NewsListTableViewCell,
                            withIndexPath indexPath: IndexPath) {
-        if indexPath.row >= feedItems.count {
+        if indexPath.row >= items.count {
             return
         }
 
-        let item = feedItems[indexPath.row]
+        let item = items[indexPath.row]
         if let title = item.title {
             cell.title = title
         } else {
             cell.title = "-"
-        }
-
-        if let x = item.content {
-            cell.publishInfo = x
         }
     }
 
@@ -137,7 +155,7 @@ extension NewsListTableViewController {
     
     override func tableView(_ tableView: UITableView,
                             numberOfRowsInSection section: Int) -> Int {
-        return feedItems.count
+        return items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -155,5 +173,37 @@ extension NewsListTableViewController {
 extension NewsListTableViewController: FeedSelectionCollectionViewControllerDelegate {
     func feedSelectionCollectionViewControllerDidSelectFeeds(_ viewController: FeedSelectionCollectionViewController) {
         loadData(withRefresh: true)
+    }
+}
+
+// MARK: - UISearchBarDelegate
+
+extension NewsListTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar,
+                   textDidChange searchText: String) {
+        if searchText.isEmpty {
+            isSearching = false
+        } else {
+            isSearching = true
+            filterNews(searchText)
+        }
+
+        tableView.reloadData()
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        view.endEditing(true)
+    }
+
+    func filterNews(_ searchText: String) {
+        filteredItems = feedItems.filter({ (item: FeeedItem) -> Bool in
+            if let title = item.title {
+                let match = title.range(of: searchText,
+                                        options: NSString.CompareOptions.caseInsensitive)
+                return match != nil
+            }
+
+            return false
+        })
     }
 }

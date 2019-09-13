@@ -117,5 +117,6 @@ class NewsListTableViewCell: UITableViewCell {
                                                 constant: labelContainerViewInsets.top).isActive = true
         labelContainerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor,
                                                    constant: -labelContainerViewInsets.bottom).isActive = true
+        labelContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: thumbnailImageViewDimension).isActive = true
     }
 }
