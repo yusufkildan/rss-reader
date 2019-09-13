@@ -33,6 +33,18 @@ class NewsListTableViewController: BaseTableViewController {
         loadData(withRefresh: true)
     }
 
+    // MARK: - Interface
+
+    override func canPullToRefresh() -> Bool {
+        return true
+    }
+
+    // MARK: - Refresh
+
+    override func refresh(_ refreshControl: UIRefreshControl) {
+        loadData(withRefresh: true)
+    }
+    
     // MARK: - Load Data
 
     override func loadData(withRefresh refresh: Bool) {
@@ -63,6 +75,7 @@ class NewsListTableViewController: BaseTableViewController {
                 self.updateControllerState(withState: ControllerState.none)
             }
 
+            self.endRefreshing()
             self.tableView.reloadData()
         }
     }
@@ -92,6 +105,7 @@ class NewsListTableViewController: BaseTableViewController {
     @objc private func addFeedButtonTapped(_ button: UIButton) {
         // TODO: - Create Coordinator
         let viewController = FeedSelectionCollectionViewController()
+        viewController.delegate = self
         present(viewController, animated: true, completion: nil)
     }
 }
@@ -133,5 +147,13 @@ extension NewsListTableViewController {
         configure(NewsListTableViewCell: cell, withIndexPath: indexPath)
 
         return cell
+    }
+}
+
+// MARK: - FeedSelectionCollectionViewControllerDelegate
+
+extension NewsListTableViewController: FeedSelectionCollectionViewControllerDelegate {
+    func feedSelectionCollectionViewControllerDidSelectFeeds(_ viewController: FeedSelectionCollectionViewController) {
+        loadData(withRefresh: true)
     }
 }

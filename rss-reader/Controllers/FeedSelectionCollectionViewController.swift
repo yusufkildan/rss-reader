@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol FeedSelectionCollectionViewControllerDelegate: class {
+    func feedSelectionCollectionViewControllerDidSelectFeeds(_ viewController: FeedSelectionCollectionViewController)
+}
+
 class FeedSelectionCollectionViewController: BaseCollectionViewController {
     
     private var feeds: [RSSFeed] = []
@@ -22,6 +26,8 @@ class FeedSelectionCollectionViewController: BaseCollectionViewController {
             return false
         }
     }
+
+    weak var delegate: FeedSelectionCollectionViewControllerDelegate?
     
     // MARK: - View's Lifecycle
     
@@ -97,6 +103,7 @@ class FeedSelectionCollectionViewController: BaseCollectionViewController {
     @objc private func actionButtonTapped(_ button: UIButton) {
         PersistanceManager.persist(feeds, as: .feeds)
         UserDefaultsManager.hasSelectedFeed = hasSelectedFeed
+        delegate?.feedSelectionCollectionViewControllerDidSelectFeeds(self)
         
         if isPresentedModally() {
             dismiss(animated: true, completion: nil)

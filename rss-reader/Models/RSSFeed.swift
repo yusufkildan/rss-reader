@@ -13,7 +13,6 @@ class RSSFeed: Codable {
     let name: String
     let url: String
     var isSelected: Bool
-    
     init(id: Int, name: String, url: String) {
         self.id = id
         self.name = name
