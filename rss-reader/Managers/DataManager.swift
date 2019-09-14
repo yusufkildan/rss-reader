@@ -14,6 +14,8 @@ enum DataManagerError: Error {
 
 class DataManager {
     class func fetchNews(completionHandler: @escaping (Result<[FeedItem], DataManagerError>) -> Void) {
+        let queue = DispatchQueue(label: "com.yusufkildan.fetchNews.queue", qos: DispatchQoS.userInitiated)
+
         let dispatchGroup = DispatchGroup()
         var parseError: Error?
 
@@ -25,13 +27,15 @@ class DataManager {
             let parser = RSSParser()
             let request = URLRequest(url: URL(string: $0.url)!)
             dispatchGroup.enter()
-            parser.parseFor(request: request) { (feedInfo, error) in
-                if let feedInfo = feedInfo {
-                    items += feedInfo.items
-                } else if let error = error {
-                    parseError = error
+            queue.async {
+                parser.parseFor(request: request) { (feedInfo, error) in
+                    if let feedInfo = feedInfo {
+                        items += feedInfo.items
+                    } else if let error = error {
+                        parseError = error
+                    }
+                    dispatchGroup.leave()
                 }
-                dispatchGroup.leave()
             }
         }
 
