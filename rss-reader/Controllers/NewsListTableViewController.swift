@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NewsListTableViewController: BaseTableViewController {
 
@@ -115,6 +116,22 @@ class NewsListTableViewController: BaseTableViewController {
             cell.title = title
         } else {
             cell.title = "-"
+        }
+
+        if let mediaThumbnail = item.mediaThumbnail, let url = URL(string: mediaThumbnail) {
+            cell.thumbnailImageView.kf.setImage(with: url)
+        } else if let mediaContent = item.mediaContent, let url = URL(string: mediaContent) {
+            cell.thumbnailImageView.kf.setImage(with: url)
+        } else if let imagesFromContent = item.imagesFromContent, imagesFromContent.count > 0 {
+            if let url = URL(string: imagesFromContent[0]) {
+                cell.thumbnailImageView.kf.setImage(with: url)
+            }
+        } else if let imagesFromDescription = item.imagesFromDescription, imagesFromDescription.count > 0 {
+            if let url = URL(string: imagesFromDescription[0]) {
+                cell.thumbnailImageView.kf.setImage(with: url)
+            }
+        } else {
+            cell.thumbnailImageView.image = UIImage(named: "defaultThumbnailImage")
         }
     }
 

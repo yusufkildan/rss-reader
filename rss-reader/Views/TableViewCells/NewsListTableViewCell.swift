@@ -10,7 +10,7 @@ import UIKit
 
 class NewsListTableViewCell: UITableViewCell {
     private var containerView: CardView!
-    private var thumbnailImageView: UIImageView!
+    var thumbnailImageView: UIImageView!
     private var titleLabel: UILabel!
     private var publishInfoLabel: UILabel!
 
@@ -118,5 +118,12 @@ class NewsListTableViewCell: UITableViewCell {
         labelContainerView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor,
                                                    constant: -labelContainerViewInsets.bottom).isActive = true
         labelContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: thumbnailImageViewDimension).isActive = true
+    }
+
+    // MARK: - Prepare
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        thumbnailImageView.image = nil
     }
 }
