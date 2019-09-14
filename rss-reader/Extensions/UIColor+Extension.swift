@@ -26,6 +26,7 @@ struct ColorPalette {
 
     struct Secondary {
         static let shadow = UIColor.blueRibbon
+        static let tint = UIColor.blueRibbon
 
         struct Light {
             static let text = UIColor.white

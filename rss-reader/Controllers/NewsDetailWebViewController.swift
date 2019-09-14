@@ -14,6 +14,9 @@ class NewsDetailWebViewController: BaseWebViewController {
     private let url: URL
 
     private var backButton: OverlayButton!
+    private var progressView: UIProgressView!
+
+    private var progressObserver: NSKeyValueObservation?
 
     // MARK: - Constructors
 
@@ -31,9 +34,17 @@ class NewsDetailWebViewController: BaseWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.bringSubviewToFront(subComponentsHolderView)
-        updateControllerState(withState: ControllerState.loading)
+        progressView = UIProgressView(progressViewStyle: UIProgressView.Style.default)
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        progressView.tintColor = ColorPalette.Secondary.tint
 
+        view.addSubview(progressView)
+
+        progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        progressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        progressView.heightAnchor.constraint(equalToConstant: 2.0).isActive = true
+        
         backButton = OverlayButton(type: UIButton.ButtonType.system)
         backButton.translatesAutoresizingMaskIntoConstraints = false
         backButton.titleLabel?.font = UIFont.avenirNextBoldFont(withSize: 18.0)
@@ -52,6 +63,14 @@ class NewsDetailWebViewController: BaseWebViewController {
                                              constant: -insets.right).isActive = true
         backButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor,
                                            constant: -insets.bottom).isActive = true
+
+        progressObserver = webView.observe(\.estimatedProgress, options: [.new]) { [weak self](webView, _) in
+            guard let self = self else {
+                return
+            }
+
+            self.progressView.progress = Float(webView.estimatedProgress)
+        }
 
         webView.load(URLRequest(url: url))
     }
@@ -74,7 +93,7 @@ class NewsDetailWebViewController: BaseWebViewController {
 extension NewsDetailWebViewController {
     override func webView(_ webView: WKWebView,
                           didFinish navigation: WKNavigation!) {
-        updateControllerState(withState: ControllerState.none)
+        progressView.isHidden = true
     }
 
     override func webView(_ webView: WKWebView,
