@@ -9,19 +9,25 @@
 import UIKit
 import WebKit
 
+protocol NewsDetailWebViewControllerDelegate: class {
+    func newsDetailWebViewControllerDidReadArticle(_ viewController: NewsDetailWebViewController, item: FeedItem)
+}
+
 class NewsDetailWebViewController: BaseWebViewController {
 
-    private let url: URL
+    private let item: FeedItem
 
     private var backButton: OverlayButton!
     private var progressView: UIProgressView!
 
     private var progressObserver: NSKeyValueObservation?
 
+    weak var delegate: NewsDetailWebViewControllerDelegate?
+
     // MARK: - Constructors
 
-    init(withURL url: URL) {
-        self.url = url
+    init(withItem item: FeedItem) {
+        self.item = item
         super.init()
     }
 
@@ -72,7 +78,13 @@ class NewsDetailWebViewController: BaseWebViewController {
             self.progressView.progress = Float(webView.estimatedProgress)
         }
 
-        webView.load(URLRequest(url: url))
+        loadWebsite()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        delegate?.newsDetailWebViewControllerDidReadArticle(self, item: item)
     }
 
     // MARK: - Interface
@@ -85,6 +97,14 @@ class NewsDetailWebViewController: BaseWebViewController {
 
     @objc private func actionButtonTapped(_ button: UIButton) {
         navigationController?.popViewController(animated: true)
+    }
+
+    // MARK: - Other Methods
+
+    private func loadWebsite() {
+        if let url = item.link {
+            webView.load(URLRequest(url: url))
+        }
     }
 }
 
@@ -103,7 +123,7 @@ extension NewsDetailWebViewController {
             guard let self = self else {
                 return
             }
-            self.webView.load(URLRequest(url: self.url))
+            self.loadWebsite()
         }
     }
 }

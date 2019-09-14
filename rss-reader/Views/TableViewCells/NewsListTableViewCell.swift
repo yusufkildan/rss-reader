@@ -38,6 +38,20 @@ class NewsListTableViewCell: UITableViewCell {
         }
     }
 
+    var isReaded: Bool! {
+        didSet {
+            if isReaded {
+                thumbnailImageView.alpha = 0.5
+                titleLabel.alpha = 0.5
+                publishInfoLabel.alpha = 0.5
+            } else {
+                thumbnailImageView.alpha = 1.0
+                titleLabel.alpha = 1.0
+                publishInfoLabel.alpha = 1.0
+            }
+        }
+    }
+
     // MARK: - Constructors
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

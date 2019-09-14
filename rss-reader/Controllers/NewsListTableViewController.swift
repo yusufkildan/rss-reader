@@ -99,6 +99,7 @@ class NewsListTableViewController: BaseTableViewController {
 
                 return false
             })
+            
             if errorOccured {
                 self.updateControllerState(withState: ControllerState.error)
             } else {
@@ -144,6 +145,8 @@ class NewsListTableViewController: BaseTableViewController {
         } else {
             cell.thumbnailImageView.image = UIImage(named: "defaultThumbnailImage")
         }
+
+        cell.isReaded = item.isReaded
     }
 
     // MARK: - Actions
@@ -167,10 +170,9 @@ extension NewsListTableViewController {
 
         let item = items[indexPath.row]
 
-        if let link = item.link {
-            let viewController = NewsDetailWebViewController(withURL: link)
-            navigationController?.pushViewController(viewController, animated: true)
-        }
+        let viewController = NewsDetailWebViewController(withItem: item)
+        viewController.delegate = self
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     @objc func tableView(_ tableView: UITableView,
@@ -243,5 +245,17 @@ extension NewsListTableViewController: UISearchBarDelegate {
 
             return false
         })
+    }
+}
+
+// MARK: - NewsDetailWebViewControllerDelegate
+
+extension NewsListTableViewController: NewsDetailWebViewControllerDelegate {
+    func newsDetailWebViewControllerDidReadArticle(_ viewController: NewsDetailWebViewController,
+                                                   item: FeedItem) {
+        if let index = items.firstIndex(of: item) {
+            items[Int(index)].isReaded = true
+            tableView.reloadData()
+        }
     }
 }
