@@ -9,18 +9,27 @@
 import UIKit
 
 enum ElementName: String {
-    case item          = "item"
-    case title         = "title"
-    case link          = "link"
-    case guid          = "guid"
-    case pubDate       = "pubDate"
-    case description   = "description"
-    case content       = "content:encoded"
-    case language      = "language"
-    case lastBuildDate = "lastBuildDate"
-    case generator     = "generator"
-    case copyright     = "copyright"
-    case thumbnail     = "mash:thumbnail"
+    case item               = "item"
+    case entry              = "entry"
+    case title              = "title"
+    case link               = "link"
+    case guid               = "guid"
+    case pubDate            = "pubDate"
+    case description        = "description"
+    case contentEncoded     = "content:encoded"
+    case language           = "language"
+    case lastBuildDate      = "lastBuildDate"
+    case generator          = "generator"
+    case copyright          = "copyright"
+    case thumbnail          = "media:thumbnail"
+    case content            = "content"
+    case author             = "author"
+    case comments           = "comments"
+    case source             = "source"
+    case published          = "published"
+    case mediaContent       = "media:content"
+    case enclosure          = "enclosure"
+    case category           = "category"
 }
 
 class RSSParser: NSObject {
@@ -29,6 +38,8 @@ class RSSParser: NSObject {
     var currentItem: FeedItem?
     var feed = FeedInfo()
     var currentElement = ""
+    var currentAttributes: [String: String]?
+    var parsingItems: Bool = false
 
     // MARK: - Constructors
 
@@ -47,10 +58,9 @@ class RSSParser: NSObject {
 
                 let parser = XMLParser(data: data)
                 parser.delegate = self
-                parser.shouldResolveExternalEntities = false
                 parser.parse()
             }
-            }.resume()
+        }.resume()
     }
 }
 
@@ -71,35 +81,22 @@ extension RSSParser: XMLParserDelegate {
                 namespaceURI: String?,
                 qualifiedName qName: String?,
                 attributes attributeDict: [String : String] = [:]) {
-        if elementName == ElementName.item.rawValue {
+        currentAttributes = attributeDict
+        currentElement = ""
+
+        if elementName == ElementName.item.rawValue || elementName == ElementName.entry.rawValue {
             currentItem = FeedItem()
         }
-
-        currentElement = ""
     }
 
     func parser(_ parser: XMLParser,
                 didEndElement elementName: String,
                 namespaceURI: String?,
                 qualifiedName qName: String?) {
-        if elementName == ElementName.item.rawValue {
+        if elementName == ElementName.item.rawValue || elementName == ElementName.entry.rawValue {
             if let item = currentItem {
-                if let content = item.content {
-                    var imageURLs = content.imageURLsFromHTMLString
-
-                    if imageURLs.isEmpty {
-                        if let description = item.itemDescription {
-                            imageURLs = description.imageURLsFromHTMLString
-                        }
-                    }
-
-                    item.imageURLs = imageURLs
-                }
-
-
                 feed.items.append(item)
             }
-
             self.currentItem = nil
             return
         }
@@ -114,10 +111,38 @@ extension RSSParser: XMLParserDelegate {
                 item.pubDate = currentElement // TODO
             case ElementName.description.rawValue:
                 item.itemDescription = currentElement
-            case ElementName.content.rawValue:
+            case ElementName.content.rawValue, ElementName.contentEncoded.rawValue:
                 item.content = currentElement
             case ElementName.link.rawValue:
                 item.link = URL(string: currentElement)
+            case ElementName.author.rawValue:
+                item.author = currentElement
+            case ElementName.comments.rawValue:
+                item.comments = currentElement
+            case ElementName.source.rawValue:
+                item.source = currentElement
+            case ElementName.published.rawValue:
+                item.pubDate = currentElement // TODO
+            case ElementName.thumbnail.rawValue:
+                if let attributes = currentAttributes {
+                    if let url = attributes["url"] {
+                        item.mediaThumbnail = url
+                    }
+                }
+            case ElementName.mediaContent.rawValue:
+                if let attributes = currentAttributes {
+                    if let url = attributes["url"] {
+                        item.mediaContent = url
+                    }
+                }
+            case ElementName.enclosure.rawValue:
+                if let attributes = currentAttributes {
+                    item.enclosures = (item.enclosures ?? []) + [attributes]
+                }
+            case ElementName.category.rawValue:
+                if let attributes = currentAttributes {
+                    item.categories = (item.categories ?? []) + [attributes]
+                }
             default:
                 break
             }
@@ -153,6 +178,8 @@ extension RSSParser: XMLParserDelegate {
         if let completionHandler = completionHandler {
             completionHandler(nil, parseError)
         }
+
+        parser.abortParsing()
     }
 }
 
