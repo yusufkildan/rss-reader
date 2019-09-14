@@ -103,11 +103,23 @@ class NewsListTableViewController: BaseTableViewController {
             cell.title = "-"
         }
 
-        if let date = item.pubDate {
-            cell.publishInfo = Date.timePassedSinceDate(date)
-        } else {
-            cell.publishInfo = "-"
+        let attributedString = NSMutableAttributedString()
+
+        if let publisherName = item.publisherName {
+            let attributes = [NSAttributedString.Key.foregroundColor: ColorPalette.Primary.Dark.text,
+                              NSAttributedString.Key.font: UIFont.avenirNextMediumFont(withSize: 16.0)]
+            let publisherNameAttributedString = NSAttributedString(string: publisherName, attributes: attributes)
+            attributedString.append(publisherNameAttributedString)
         }
+
+        if let date = item.pubDate {
+            let attributes = [NSAttributedString.Key.foregroundColor: ColorPalette.Primary.Light.text,
+                              NSAttributedString.Key.font: UIFont.avenirNextRegularFont(withSize: 13.0)]
+            let publishedDateAttributedString = NSAttributedString(string: "  " + Date.timePassedSinceDate(date), attributes: attributes)
+            attributedString.append(publishedDateAttributedString)
+        }
+
+        cell.attributedPublishInfo = attributedString
 
         if let mediaThumbnail = item.mediaThumbnail, let url = URL(string: mediaThumbnail) {
             cell.thumbnailImageView.kf.setImage(with: url)

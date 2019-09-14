@@ -38,6 +38,7 @@ class FeedItem: Codable {
     var enclosures: [[String: String]]?
     var categories: [[String: String]]?
     var isReaded: Bool = false
+    var publisherName: String?
     
     private func imagesFromHTMLString(_ htmlString: String) -> [String] {
         let htmlNSString = htmlString as NSString

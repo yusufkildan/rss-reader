@@ -40,6 +40,7 @@ class RSSParser: NSObject {
     var currentElement = ""
     var currentAttributes: [String: String]?
     var parsingItems: Bool = false
+    var rssFeed: RSSFeed?
 
     // MARK: - Constructors
 
@@ -49,7 +50,9 @@ class RSSParser: NSObject {
 
     // MARK: - Methods
 
-    func parseFor(request: URLRequest, completionHandler: ((FeedInfo?, Error?) -> Void)?) {
+    func parseFor(feed: RSSFeed, completionHandler: ((FeedInfo?, Error?) -> Void)?) {
+        let request = URLRequest(url: URL(string: feed.url)!)
+        self.rssFeed = feed
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             if let error = error {
                 completionHandler?(nil, error)
@@ -102,6 +105,7 @@ extension RSSParser: XMLParserDelegate {
         }
 
         if let item = currentItem {
+            item.publisherName = rssFeed?.name
             switch elementName {
             case ElementName.title.rawValue:
                 item.title = currentElement
