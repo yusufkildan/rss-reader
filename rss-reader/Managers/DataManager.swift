@@ -49,6 +49,8 @@ class DataManager {
             items = items.map {
                 if readedItems.contains($0) {
                     $0.isReaded = true
+                } else {
+                    $0.isReaded = false
                 }
 
                 return $0
@@ -122,6 +124,8 @@ class DataManager {
             items = items.map {
                 if readedItems.contains($0) {
                     $0.isReaded = true
+                } else {
+                    $0.isReaded = false
                 }
 
                 return $0
