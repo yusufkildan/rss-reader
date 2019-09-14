@@ -133,6 +133,16 @@ class NewsListTableViewController: BaseTableViewController {
 extension NewsListTableViewController {
     override func tableView(_ tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row >= items.count {
+            return
+        }
+
+        let item = items[indexPath.row]
+
+        if let link = item.link {
+            let viewController = NewsDetailWebViewController(withURL: link)
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 
     @objc func tableView(_ tableView: UITableView,
