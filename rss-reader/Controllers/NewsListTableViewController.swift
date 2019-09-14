@@ -48,7 +48,10 @@ class NewsListTableViewController: BaseTableViewController {
 
         register(cell: NewsListTableViewCell())
         tableView.tableHeaderView = searchBar
-        loadData(withRefresh: true)
+
+        feedItems = DataManager.getPersistedNews()
+        let refresh = feedItems.count > 0
+        loadData(withRefresh: refresh)
     }
 
     // MARK: - Interface
@@ -66,44 +69,18 @@ class NewsListTableViewController: BaseTableViewController {
     // MARK: - Load Data
 
     override func loadData(withRefresh refresh: Bool) {
-        super.loadData(withRefresh: refresh)
-
-        if refresh {
-            feedItems = []
+        if !refresh {
+            super.loadData(withRefresh: refresh)
         }
 
-        let selectedFeeds = PersistanceManager.retrieve(File.feeds, as: [RSSFeed].self).filter { $0.isSelected }
-        let dispatchGroup = DispatchGroup()
-
-        var errorOccured = false
-
-        selectedFeeds.forEach {
-            let parser = RSSParser()
-            let request = URLRequest(url: URL(string: $0.url)!)
-            dispatchGroup.enter()
-            parser.parseFor(request: request) { (feedInfo, error) in
-                if let feedInfo = feedInfo {
-                    self.feedItems += feedInfo.items
-                } else if let _ = error {
-                    errorOccured = true
-                }
-                dispatchGroup.leave()
-            }
-        }
-
-        dispatchGroup.notify(queue: DispatchQueue.main) {
-            self.feedItems = self.feedItems.sorted(by: { (item1, item2) -> Bool in
-                if let date1 = item1.pubDate, let date2 = item2.pubDate {
-                    return date1.timeIntervalSince1970 > date2.timeIntervalSince1970
-                }
-
-                return false
-            })
-            
-            if errorOccured {
-                self.updateControllerState(withState: ControllerState.error)
-            } else {
+        DataManager.fetchNews { [weak self](result) in
+            guard let self = self else { return }
+            switch result {
+            case .success(let items):
+                self.feedItems = items
                 self.updateControllerState(withState: ControllerState.none)
+            case .failure(_):
+                self.updateControllerState(withState: ControllerState.error)
             }
 
             self.endRefreshing()
@@ -128,6 +105,8 @@ class NewsListTableViewController: BaseTableViewController {
 
         if let date = item.pubDate {
             cell.publishInfo = Date.timePassedSinceDate(date)
+        } else {
+            cell.publishInfo = "-"
         }
 
         if let mediaThumbnail = item.mediaThumbnail, let url = URL(string: mediaThumbnail) {
@@ -212,7 +191,7 @@ extension NewsListTableViewController {
 
 extension NewsListTableViewController: FeedSelectionCollectionViewControllerDelegate {
     func feedSelectionCollectionViewControllerDidSelectFeeds(_ viewController: FeedSelectionCollectionViewController) {
-        loadData(withRefresh: true)
+        loadData(withRefresh: false)
     }
 }
 
@@ -255,6 +234,7 @@ extension NewsListTableViewController: NewsDetailWebViewControllerDelegate {
                                                    item: FeedItem) {
         if let index = items.firstIndex(of: item) {
             items[Int(index)].isReaded = true
+            DataManager.marksAsAReaded(item)
             tableView.reloadData()
         }
     }

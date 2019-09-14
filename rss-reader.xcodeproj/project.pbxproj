@@ -44,6 +44,7 @@
 		9942EBFA232CFAB0004999FD /* RFC822DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9942EBF9232CFAB0004999FD /* RFC822DateFormatter.swift */; };
 		9942EBFC232CFAE5004999FD /* RFC3339DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9942EBFB232CFAE5004999FD /* RFC3339DateFormatter.swift */; };
 		9942EBFE232CFB08004999FD /* ISO8601DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9942EBFD232CFB08004999FD /* ISO8601DateFormatter.swift */; };
+		9942EC02232D1778004999FD /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9942EC01232D1778004999FD /* DataManager.swift */; };
 		994ABD0D2329803B00ACD66D /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994ABD0C2329803B00ACD66D /* UserDefaultsManager.swift */; };
 		994ABD0F232985D400ACD66D /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994ABD0E232985D400ACD66D /* NewsListTableViewCell.swift */; };
 		994ABD1123298E1100ACD66D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994ABD1023298E1100ACD66D /* CardView.swift */; };
@@ -115,6 +116,7 @@
 		9942EBF9232CFAB0004999FD /* RFC822DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFC822DateFormatter.swift; sourceTree = "<group>"; };
 		9942EBFB232CFAE5004999FD /* RFC3339DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFC3339DateFormatter.swift; sourceTree = "<group>"; };
 		9942EBFD232CFB08004999FD /* ISO8601DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO8601DateFormatter.swift; sourceTree = "<group>"; };
+		9942EC01232D1778004999FD /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		994ABD0C2329803B00ACD66D /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		994ABD0E232985D400ACD66D /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
 		994ABD1023298E1100ACD66D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				99268A9C2329757C00E4C158 /* PersistanceManager.swift */,
 				994ABD0C2329803B00ACD66D /* UserDefaultsManager.swift */,
 				9901583E232B5DFD008551F1 /* RSSParser.swift */,
+				9942EC01232D1778004999FD /* DataManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				9942EBFA232CFAB0004999FD /* RFC822DateFormatter.swift in Sources */,
 				991E9D112328245F003A6981 /* BaseWebViewController.swift in Sources */,
 				9942EBF7232CEAE2004999FD /* Date+Extension.swift in Sources */,
+				9942EC02232D1778004999FD /* DataManager.swift in Sources */,
 				991E9D2623282CE1003A6981 /* String+Extension.swift in Sources */,
 				991E9D3523283E36003A6981 /* FeedSelectionCollectionViewLayout.swift in Sources */,
 				991E9D3723284AF1003A6981 /* OverlayButton.swift in Sources */,

@@ -63,3 +63,15 @@ extension FeedItem: Equatable {
         return lhs.title == rhs.title && lhs.guid == rhs.guid && lhs.link == rhs.link
     }
 }
+
+// MARK: - Comparable
+
+extension FeedItem: Comparable {
+    static func < (lhs: FeedItem, rhs: FeedItem) -> Bool {
+        let lhsTimestamp = lhs.pubDate?.timeIntervalSince1970 ?? 0
+        let rhsTimestamp = rhs.pubDate?.timeIntervalSince1970 ?? 0
+
+        return lhsTimestamp > rhsTimestamp
+    }
+
+}

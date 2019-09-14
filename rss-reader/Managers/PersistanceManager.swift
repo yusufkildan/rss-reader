@@ -11,6 +11,7 @@ import Foundation
 enum File {
     case feeds
     case latestNews
+    case readedNews
 
     var fileName: String {
         switch self {
@@ -18,6 +19,8 @@ enum File {
             return "feeds"
         case .latestNews:
             return "latestNews"
+        case .readedNews:
+            return "readedNews"
         }
     }
 }
