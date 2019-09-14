@@ -40,6 +40,10 @@
 		991E9D3523283E36003A6981 /* FeedSelectionCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D3423283E36003A6981 /* FeedSelectionCollectionViewLayout.swift */; };
 		991E9D3723284AF1003A6981 /* OverlayButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991E9D3623284AF1003A6981 /* OverlayButton.swift */; };
 		99268A9D2329757C00E4C158 /* PersistanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99268A9C2329757C00E4C158 /* PersistanceManager.swift */; };
+		9942EBF7232CEAE2004999FD /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9942EBF6232CEAE1004999FD /* Date+Extension.swift */; };
+		9942EBFA232CFAB0004999FD /* RFC822DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9942EBF9232CFAB0004999FD /* RFC822DateFormatter.swift */; };
+		9942EBFC232CFAE5004999FD /* RFC3339DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9942EBFB232CFAE5004999FD /* RFC3339DateFormatter.swift */; };
+		9942EBFE232CFB08004999FD /* ISO8601DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9942EBFD232CFB08004999FD /* ISO8601DateFormatter.swift */; };
 		994ABD0D2329803B00ACD66D /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994ABD0C2329803B00ACD66D /* UserDefaultsManager.swift */; };
 		994ABD0F232985D400ACD66D /* NewsListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994ABD0E232985D400ACD66D /* NewsListTableViewCell.swift */; };
 		994ABD1123298E1100ACD66D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994ABD1023298E1100ACD66D /* CardView.swift */; };
@@ -107,6 +111,10 @@
 		991E9D3423283E36003A6981 /* FeedSelectionCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSelectionCollectionViewLayout.swift; sourceTree = "<group>"; };
 		991E9D3623284AF1003A6981 /* OverlayButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayButton.swift; sourceTree = "<group>"; };
 		99268A9C2329757C00E4C158 /* PersistanceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistanceManager.swift; sourceTree = "<group>"; };
+		9942EBF6232CEAE1004999FD /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		9942EBF9232CFAB0004999FD /* RFC822DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFC822DateFormatter.swift; sourceTree = "<group>"; };
+		9942EBFB232CFAE5004999FD /* RFC3339DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RFC3339DateFormatter.swift; sourceTree = "<group>"; };
+		9942EBFD232CFB08004999FD /* ISO8601DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISO8601DateFormatter.swift; sourceTree = "<group>"; };
 		994ABD0C2329803B00ACD66D /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
 		994ABD0E232985D400ACD66D /* NewsListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsListTableViewCell.swift; sourceTree = "<group>"; };
 		994ABD1023298E1100ACD66D /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -178,6 +186,7 @@
 		991E9CCF232820FE003A6981 /* rss-reader */ = {
 			isa = PBXGroup;
 			children = (
+				9942EBF8232CFAA2004999FD /* Formatters */,
 				99268A9B2329755D00E4C158 /* Managers */,
 				991E9D0023282113003A6981 /* Models */,
 				991E9CFF2328210D003A6981 /* Views */,
@@ -266,6 +275,7 @@
 				991E9D1423282747003A6981 /* UIFont+Extension.swift */,
 				991E9D1923282A9F003A6981 /* UIView+Extension.swift */,
 				991E9D2523282CE1003A6981 /* String+Extension.swift */,
+				9942EBF6232CEAE1004999FD /* Date+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -360,6 +370,16 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		9942EBF8232CFAA2004999FD /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				9942EBF9232CFAB0004999FD /* RFC822DateFormatter.swift */,
+				9942EBFB232CFAE5004999FD /* RFC3339DateFormatter.swift */,
+				9942EBFD232CFB08004999FD /* ISO8601DateFormatter.swift */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
 		C734241DC108BB490527E931 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,7 +390,6 @@
 				39B46B88FB4BAA713F9CF944 /* Pods-rss-readerUITests.debug.xcconfig */,
 				122DA54B2471B499088613EC /* Pods-rss-readerUITests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -602,6 +621,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				991E9D2A23283943003A6981 /* FeedSelectionCollectionViewController.swift in Sources */,
+				9942EBFE232CFB08004999FD /* ISO8601DateFormatter.swift in Sources */,
 				991E9D1A23282A9F003A6981 /* UIView+Extension.swift in Sources */,
 				9901583C232B5DF3008551F1 /* FeedInfo.swift in Sources */,
 				991E9CD3232820FE003A6981 /* NewsListTableViewController.swift in Sources */,
@@ -616,7 +636,9 @@
 				991E9D1823282A85003A6981 /* EmptyStateView.swift in Sources */,
 				991E9D0B23282438003A6981 /* BaseTableViewController.swift in Sources */,
 				991E9D28232831AA003A6981 /* ReusableView.swift in Sources */,
+				9942EBFA232CFAB0004999FD /* RFC822DateFormatter.swift in Sources */,
 				991E9D112328245F003A6981 /* BaseWebViewController.swift in Sources */,
+				9942EBF7232CEAE2004999FD /* Date+Extension.swift in Sources */,
 				991E9D2623282CE1003A6981 /* String+Extension.swift in Sources */,
 				991E9D3523283E36003A6981 /* FeedSelectionCollectionViewLayout.swift in Sources */,
 				991E9D3723284AF1003A6981 /* OverlayButton.swift in Sources */,
@@ -629,6 +651,7 @@
 				991E9D1323282546003A6981 /* UIColor+Extension.swift in Sources */,
 				994ABD1123298E1100ACD66D /* CardView.swift in Sources */,
 				991E9D1C23282AE1003A6981 /* Utils.swift in Sources */,
+				9942EBFC232CFAE5004999FD /* RFC3339DateFormatter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

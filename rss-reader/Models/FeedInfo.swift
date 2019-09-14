@@ -14,7 +14,7 @@ class FeedInfo: Codable {
     var link: URL?
     var description: String?
     var lang: String?
-    var lastBuildDate: String?
+    var lastBuildDate: Date?
     var generator: String?
     var copyright: String?
 }

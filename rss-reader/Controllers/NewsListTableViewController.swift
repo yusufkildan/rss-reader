@@ -92,6 +92,13 @@ class NewsListTableViewController: BaseTableViewController {
         }
 
         dispatchGroup.notify(queue: DispatchQueue.main) {
+            self.feedItems = self.feedItems.sorted(by: { (item1, item2) -> Bool in
+                if let date1 = item1.pubDate, let date2 = item2.pubDate {
+                    return date1.timeIntervalSince1970 > date2.timeIntervalSince1970
+                }
+
+                return false
+            })
             if errorOccured {
                 self.updateControllerState(withState: ControllerState.error)
             } else {
@@ -116,6 +123,10 @@ class NewsListTableViewController: BaseTableViewController {
             cell.title = title
         } else {
             cell.title = "-"
+        }
+
+        if let date = item.pubDate {
+            cell.publishInfo = Date.timePassedSinceDate(date)
         }
 
         if let mediaThumbnail = item.mediaThumbnail, let url = URL(string: mediaThumbnail) {

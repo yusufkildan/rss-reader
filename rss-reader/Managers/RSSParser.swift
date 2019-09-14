@@ -108,7 +108,7 @@ extension RSSParser: XMLParserDelegate {
             case ElementName.guid.rawValue:
                 item.guid = currentElement
             case ElementName.pubDate.rawValue:
-                item.pubDate = currentElement // TODO
+                item.pubDate = currentElement.toDate()
             case ElementName.description.rawValue:
                 item.itemDescription = currentElement
             case ElementName.content.rawValue, ElementName.contentEncoded.rawValue:
@@ -122,7 +122,7 @@ extension RSSParser: XMLParserDelegate {
             case ElementName.source.rawValue:
                 item.source = currentElement
             case ElementName.published.rawValue:
-                item.pubDate = currentElement // TODO
+                item.pubDate = currentElement.toDate()
             case ElementName.thumbnail.rawValue:
                 if let attributes = currentAttributes {
                     if let url = attributes["url"] {
@@ -157,7 +157,7 @@ extension RSSParser: XMLParserDelegate {
             case ElementName.language.rawValue:
                 feed.lang = currentElement
             case ElementName.lastBuildDate.rawValue:
-                feed.lastBuildDate = currentElement // TODO
+                feed.lastBuildDate = currentElement.toDate()
             case ElementName.generator.rawValue:
                 feed.generator = currentElement
             case ElementName.copyright.rawValue:

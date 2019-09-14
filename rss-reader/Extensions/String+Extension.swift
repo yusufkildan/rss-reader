@@ -12,4 +12,10 @@ extension String {
     static func localize(_ key: String) -> String {
         return NSLocalizedString(key, comment: "")
     }
+
+    func toDate() -> Date? {
+        return RFC822DateFormatter().date(from: self) ??
+            (RFC3339DateFormatter().date(from: self) ??
+            ISO8601DateFormatter().date(from: self))
+    }
 }

@@ -13,3 +13,13 @@
 "continue" = "CONTINUE";
 "search" = "Search";
 "back" = "BACK";
+"one_sec_short" = "1s";
+"secs_short" = "%@s";
+"one_min_short" = "1m";
+"mins_short" = "%@m";
+"one_hour_short" = "1h";
+"hours_short" = "%@h";
+"one_day_short" = "1d";
+"days_short" = "%@d";
+"one_week_short" = "1w";
+"weeks_short"= "%@w";

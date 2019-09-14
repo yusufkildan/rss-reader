@@ -13,3 +13,13 @@
 "continue" = "DEVAM ET";
 "search" = "Ara";
 "back" = "GERİ DÖN";
+"one_sec_short" = "1s";
+"secs_short" = "%@s";
+"one_min_short" = "1d";
+"mins_short" = "%@d";
+"one_hour_short" = "1sa";
+"hours_short" = "%@sa";
+"one_day_short" = "1g";
+"days_short" = "%@g";
+"one_week_short" = "1h";
+"weeks_short"= "%@h";

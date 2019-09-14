@@ -12,7 +12,7 @@ class FeedItem: Codable {
     var title: String?
     var link: URL?
     var guid: String?
-    var pubDate: String?
+    var pubDate: Date?
     var itemDescription: String? {
         didSet {
             if let itemDescription = itemDescription {
