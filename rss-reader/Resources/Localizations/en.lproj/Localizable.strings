@@ -23,3 +23,5 @@
 "days" = "%d days ago";
 "one_week" = "1 week ago";
 "weeks"= "%d weeks ago";
+"mark_as_a_readed" = "MARK AS A READED";
+"mark_as_a_unreaded" = "MARK AS A UNREADED";

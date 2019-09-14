@@ -70,6 +70,14 @@ class DataManager {
         PersistanceManager.persist(readedNews, as: File.readedNews)
     }
 
+    class func marksAsAUnreaded(_ item: FeedItem) {
+        var readedNews: [FeedItem] = getReadedNews()
+        if let index = readedNews.firstIndex(of: item)  {
+            readedNews.remove(at: index)
+        }
+        PersistanceManager.persist(readedNews, as: File.readedNews)
+    }
+
     class func getReadedNews() -> [FeedItem] {
         if PersistanceManager.fileExists(File.readedNews) {
             return PersistanceManager.retrieve(File.readedNews, as: [FeedItem].self)

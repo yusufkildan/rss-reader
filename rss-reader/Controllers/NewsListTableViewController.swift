@@ -179,6 +179,39 @@ extension NewsListTableViewController {
                          estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120.0
     }
+
+    @objc func tableView(_ tableView: UITableView,
+                         editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let item = items[indexPath.row]
+
+        let title: String
+
+        if item.isReaded {
+            title = String.localize("mark_as_a_unreaded")
+        } else {
+            title = String.localize("mark_as_a_readed")
+        }
+
+        let action = UITableViewRowAction(style: UITableViewRowAction.Style.normal, title: title) { (action, indexPath) in
+            if item.isReaded {
+                DataManager.marksAsAUnreaded(item)
+                item.isReaded = false
+            } else {
+                DataManager.marksAsAReaded(item)
+                item.isReaded = true
+            }
+
+            tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
+        }
+        action.backgroundColor = ColorPalette.Primary.blue
+        
+        return [action]
+    }
+
+    @objc func tableView(_ tableView: UITableView,
+                         canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 }
 
 // MARK: - UITableViewDataSource

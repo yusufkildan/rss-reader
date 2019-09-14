@@ -23,3 +23,5 @@
 "days" = "%d gün önce";
 "one_week" = "1 hafta önce";
 "weeks"= "%d hafta önce";
+"mark_as_a_readed" = "OKUNDU OLARAK İŞARETLE";
+"mark_as_a_unreaded" = "OKUNMADI OLARAK İŞARETLE";
