@@ -39,7 +39,12 @@ class FeedItem: Codable {
     var categories: [[String: String]]?
     var isReaded: Bool = false
     var publisherName: String?
-    
+
+    /// Retrieves all the images (\<img\> tags) from a given String contaning HTML using a regex
+    ///
+    /// - Parameters:
+    ///   - htmlString: A String containing HTML
+    /// - Returns: an array of image url Strings ([String])
     private func imagesFromHTMLString(_ htmlString: String) -> [String] {
         let htmlNSString = htmlString as NSString
         var images: [String] = []
@@ -71,7 +76,7 @@ extension FeedItem: Comparable {
     static func < (lhs: FeedItem, rhs: FeedItem) -> Bool {
         let lhsTimestamp = lhs.pubDate?.timeIntervalSince1970 ?? 0
         let rhsTimestamp = rhs.pubDate?.timeIntervalSince1970 ?? 0
-
+        
         return lhsTimestamp > rhsTimestamp
     }
 

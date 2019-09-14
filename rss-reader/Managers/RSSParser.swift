@@ -50,6 +50,10 @@ class RSSParser: NSObject {
 
     // MARK: - Methods
 
+    /// Parses rss feed
+    ///
+    /// - Parameters:
+    ///   - feed: RSSFeed
     func parseFor(feed: RSSFeed, completionHandler: ((FeedInfo?, Error?) -> Void)?) {
         let request = URLRequest(url: URL(string: feed.url)!)
         self.rssFeed = feed

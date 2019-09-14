@@ -14,7 +14,7 @@ enum DataManagerError: Error {
 
 class DataManager {
     /// Starts parsing the selected feeds asynchronously.
-    ///  Parsing runs on the background thread
+    /// Parsing runs on the background thread
     class func fetchNews(completionHandler: @escaping (Result<[FeedItem], DataManagerError>) -> Void) {
         let queue = DispatchQueue(label: "com.yusufkildan.fetchNews.queue", qos: DispatchQoS.userInitiated)
 
@@ -42,7 +42,7 @@ class DataManager {
         }
 
         dispatchGroup.notify(queue: DispatchQueue.main) {
-            items = items.sorted() // O(n log n)
+            items = items.sorted() // O(n log n) complexity
 
             let readedItems = getReadedNews()
 

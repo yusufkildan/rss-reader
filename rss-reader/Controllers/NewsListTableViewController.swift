@@ -60,6 +60,10 @@ class NewsListTableViewController: BaseTableViewController {
         return true
     }
 
+    override var shouldHideKeyboardWhenTappedArround: Bool {
+        return true
+    }
+    
     // MARK: - Refresh
 
     override func refresh(_ refreshControl: UIRefreshControl) {

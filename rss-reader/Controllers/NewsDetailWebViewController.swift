@@ -119,6 +119,7 @@ extension NewsDetailWebViewController {
     override func webView(_ webView: WKWebView,
                           didFail navigation: WKNavigation!,
                           withError error: Error) {
+        // If request fails try again 1 second later
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 1) { [weak self] in
             guard let self = self else {
                 return

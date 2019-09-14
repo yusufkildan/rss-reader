@@ -34,7 +34,8 @@ class PersistanceManager {
     }
     
     // MARK: - Methods
-    
+
+    /// Returns documentDirectory url
     class func getURL() -> URL {
         let documentDirectory: FileManager.SearchPathDirectory = .documentDirectory
         
@@ -44,7 +45,13 @@ class PersistanceManager {
             fatalError("Could not create URL!")
         }
     }
-    
+
+    /// Persists encodable class/struct to <Application_Home>/DocumentsDirectory as JSON data
+    ///
+    /// - Parameters:
+    ///   - object: the Encodable class/struct to store
+    ///   - file: file location name to store the data
+    /// - Throws: Error if there were any issues encoding the struct or writing it to disk
     class func persist<T: Encodable>(_ object: T, as file: File) {
         let url = getURL().appendingPathComponent(file.fileName, isDirectory: false)
         
@@ -61,7 +68,13 @@ class PersistanceManager {
             fatalError(error.localizedDescription)
         }
     }
-    
+
+    /// Retrieve and decode a class/struct from a file on documentDirectory
+    ///
+    /// - Parameters:
+    ///   - file: file name of the file holding desired data
+    ///   - type: type (i.e. RSSFeed.self or [FeedItem].self)
+    /// - Returns: decoded data
     class func retrieve<T: Decodable>(_ file: File, as type: T.Type) -> T {
         let url = getURL().appendingPathComponent(file.fileName, isDirectory: false)
         
@@ -81,12 +94,14 @@ class PersistanceManager {
             fatalError("Data not found at \(url.path)!")
         }
     }
-    
+
+    /// Returns File exists or not
     class func fileExists(_ file: File) -> Bool {
         let url = getURL().appendingPathComponent(file.fileName, isDirectory: false)
         return FileManager.default.fileExists(atPath: url.path)
     }
-    
+
+    /// Removes the files at documentDirectory
     class func clear() {
         let url = getURL()
         do {

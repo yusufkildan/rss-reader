@@ -11,6 +11,7 @@ import Foundation
 protocol ReusableView: class {}
 
 extension ReusableView {
+    /// Unique identifier for object
     static var reuseIdentifier: String {
         return String(describing: self)
     }
