@@ -66,9 +66,7 @@ class DataManager {
 
     class func marksAsAReaded(_ item: FeedItem) {
         var readedNews: [FeedItem] = getReadedNews()
-
         readedNews.append(item)
-
         PersistanceManager.persist(readedNews, as: File.readedNews)
     }
 
@@ -110,7 +108,18 @@ class DataManager {
 
     class func getPersistedNews() -> [FeedItem] {
         if PersistanceManager.fileExists(File.latestNews) {
-            return PersistanceManager.retrieve(File.latestNews, as: [FeedItem].self)
+            var items = PersistanceManager.retrieve(File.latestNews, as: [FeedItem].self)
+            let readedItems = getReadedNews()
+
+            items = items.map {
+                if readedItems.contains($0) {
+                    $0.isReaded = true
+                }
+
+                return $0
+            }
+
+            return items
         }
 
         return []
