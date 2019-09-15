@@ -25,3 +25,5 @@
 "weeks"= "%d hafta önce";
 "mark_as_a_readed" = "OKUNDU OLARAK İŞARETLE";
 "mark_as_a_unreaded" = "OKUNMADI OLARAK İŞARETLE";
+"not_connected_to_internet_error_description" = "İnternet bağlantınızı kontrol ediniz!";
+

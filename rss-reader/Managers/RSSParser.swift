@@ -34,7 +34,8 @@ enum ElementName: String {
 
 class RSSParser: NSObject {
 
-    var completionHandler: ((FeedInfo?, Error?) -> Void)?
+    var completionHandler: ((Result<FeedInfo, RSSFeedError>) -> Void)?
+
     var currentItem: FeedItem?
     var feed = FeedInfo()
     var currentElement = ""
@@ -54,12 +55,16 @@ class RSSParser: NSObject {
     ///
     /// - Parameters:
     ///   - feed: RSSFeed
-    func parseFor(feed: RSSFeed, completionHandler: ((FeedInfo?, Error?) -> Void)?) {
+    func parseFor(feed: RSSFeed, completionHandler: @escaping (Result<FeedInfo, RSSFeedError>) -> Void) {
         let request = URLRequest(url: URL(string: feed.url)!)
         self.rssFeed = feed
         URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if let error = error {
-                completionHandler?(nil, error)
+            if let error = error as NSError?, error.domain == NSURLErrorDomain {
+                if error.code == NSURLErrorNotConnectedToInternet {
+                    completionHandler(.failure(.notConnectedToInternet))
+                } else {
+                    completionHandler(.failure(.unknown))
+                }
             } else if let data = data {
                 self.completionHandler = completionHandler
 
@@ -80,7 +85,7 @@ extension RSSParser: XMLParserDelegate {
 
     func parserDidEndDocument(_ parser: XMLParser) {
         if let completionHandler = completionHandler {
-            completionHandler(feed, nil)
+            completionHandler(.success(feed))
         }
     }
 
@@ -184,7 +189,7 @@ extension RSSParser: XMLParserDelegate {
     func parser(_ parser: XMLParser,
                 parseErrorOccurred parseError: Error) {
         if let completionHandler = completionHandler {
-            completionHandler(nil, parseError)
+            completionHandler(.failure(.parserFailed))
         }
 
         parser.abortParsing()

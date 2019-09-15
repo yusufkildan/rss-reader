@@ -83,8 +83,9 @@ class NewsListTableViewController: BaseTableViewController {
             case .success(let items):
                 self.feedItems = items
                 self.updateControllerState(withState: ControllerState.none)
-            case .failure(_):
-                self.updateControllerState(withState: ControllerState.error)
+            case .failure(let error):
+                self.updateControllerState(withState: ControllerState.error,
+                                           andMessage: error.localizedDescription)
             }
 
             self.endRefreshing()
@@ -185,7 +186,6 @@ extension NewsListTableViewController {
         let item = items[indexPath.row]
 
         let title: String
-
         if item.isReaded {
             title = String.localize("mark_as_a_unreaded")
         } else {
@@ -193,15 +193,19 @@ extension NewsListTableViewController {
         }
 
         let action = UITableViewRowAction(style: UITableViewRowAction.Style.normal, title: title) { (action, indexPath) in
+            guard let cell = tableView.cellForRow(at: indexPath) as? NewsListTableViewCell else {
+                return
+            }
+
             if item.isReaded {
                 DataManager.marksAsAUnreaded(item)
                 item.isReaded = false
+                cell.isReaded = false
             } else {
                 DataManager.marksAsAReaded(item)
                 item.isReaded = true
+                cell.isReaded = true
             }
-
-            tableView.reloadRows(at: [indexPath], with: UITableView.RowAnimation.none)
         }
         action.backgroundColor = ColorPalette.Primary.blue
         
@@ -226,7 +230,8 @@ extension NewsListTableViewController {
         return items.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView,
+                            cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsListTableViewCell.reuseIdentifier,
                                                  for: indexPath) as! NewsListTableViewCell
         

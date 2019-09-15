@@ -26,7 +26,7 @@ enum File {
 }
 
 class PersistanceManager {
-    
+
     // MARK: - Constructors
     
     private init() {

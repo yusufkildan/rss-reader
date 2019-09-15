@@ -25,3 +25,4 @@
 "weeks"= "%d weeks ago";
 "mark_as_a_readed" = "MARK AS A READED";
 "mark_as_a_unreaded" = "MARK AS A UNREADED";
+"not_connected_to_internet_error_description" = "Please check your internet connection!";

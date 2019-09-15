@@ -372,7 +372,7 @@ class BaseViewController: UIViewController {
 
     @objc private func _emptyStateViewActionButtonTapped(_ button: UIButton) {
         if state == ControllerState.error {
-            loadData(withRefresh: true)
+            loadData(withRefresh: false)
         }
     }
 

@@ -8,18 +8,14 @@
 
 import Foundation
 
-enum DataManagerError: Error {
-    case parseError
-}
-
 class DataManager {
     /// Starts parsing the selected feeds asynchronously.
     /// Parsing runs on the background thread
-    class func fetchNews(completionHandler: @escaping (Result<[FeedItem], DataManagerError>) -> Void) {
+    class func fetchNews(completionHandler: @escaping (Result<[FeedItem], RSSFeedError>) -> Void) {
         let queue = DispatchQueue(label: "com.yusufkildan.fetchNews.queue", qos: DispatchQoS.userInitiated)
 
         let dispatchGroup = DispatchGroup()
-        var parseError: Error?
+        var parseError: RSSFeedError?
 
         let selectedFeeds = getSelectedFeeds()
 
@@ -30,12 +26,14 @@ class DataManager {
 
             dispatchGroup.enter()
             queue.async {
-                parser.parseFor(feed: feed) { (feedInfo, error) in
-                    if let feedInfo = feedInfo {
+                parser.parseFor(feed: feed) { (result) in
+                    switch result {
+                    case .success(let feedInfo):
                         items += feedInfo.items
-                    } else if let error = error {
+                    case .failure(let error):
                         parseError = error
                     }
+
                     dispatchGroup.leave()
                 }
             }
@@ -58,8 +56,8 @@ class DataManager {
 
             persistNews(items)
 
-            if parseError != nil {
-                completionHandler(.failure(DataManagerError.parseError))
+            if let parserError = parseError {
+                completionHandler(.failure(parserError))
             } else {
                 completionHandler(.success(items))
             }

@@ -37,6 +37,7 @@ class BaseNavigationController: UINavigationController {
 // MARK: - UIGestureRecognizerDelegate
 
 extension BaseNavigationController: UIGestureRecognizerDelegate {
+    // This is necessary to fix UIKit bug
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         return viewControllers.count > 1
     }
