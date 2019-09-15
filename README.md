@@ -34,3 +34,8 @@ Simple RSS Reader app.
 
 ## Feedback
 If you have any questions or suggestions, feel free to open issue just at this project.
+
+## References
+- https://github.com/nmdias/FeedKit
+- https://developer.apple.com/documentation/foundation/xmlparser
+- https://medium.com/@MedvedevTheDev/xmlparser-working-with-rss-feeds-in-swift-86224fc507dc
