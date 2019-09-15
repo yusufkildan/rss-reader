@@ -7,7 +7,8 @@
 - *Reuse* 🤹‍        - UI is implemented programmatically too. No Storyboard or Xibs.
 
 ## Overview
-Simple RSS Reader app.
+Simple RSS Reader app. Youtube preview: 
+
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/1MtNPA4Qels/0.jpg)](https://www.youtube.com/watch?v=1MtNPA4Qels)
 
 ## Expected
