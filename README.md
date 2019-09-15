@@ -28,9 +28,9 @@ Simple RSS Reader app.
 * Swift 5.0+
 
 ## Technical Choices
-*No Storyboards or Xibs* - UI is implemented programatically. I'dont like storyboards beause of some disadventages. Disadventages:  not reusable, merge conflicts are difficult, slow, tricky code reviews etc.
-*All data persisted at documents directory* - There can be many solutions for caching in iOS platforms, like SQLite, CoreData or Realm, or other 3rd libraries. But I deciced to store my data as a JSON data at documentDirectory. I think it is more easier way to handle cache data, there is no need to add SQLite for small projects. To encode / decode my classes I've used Codable protocol.
-*Kingfisher* - I've used Kingfisher pod to download & cache images. https://github.com/onevcat/Kingfisher
+- *No Storyboards or Xibs* - UI is implemented programatically. I'dont like storyboards beause of some disadventages. Disadventages:  not reusable, merge conflicts are difficult, slow, tricky code reviews etc.
+- *All data persisted at documents directory* - There can be many solutions for caching in iOS platforms, like SQLite, CoreData or Realm, or other 3rd libraries. But I deciced to store my data as a JSON data at documentDirectory. I think it is more easier way to handle cache data, there is no need to add SQLite for small projects. To encode / decode my classes I've used Codable protocol.
+- *Kingfisher* - I've used Kingfisher pod to download & cache images. https://github.com/onevcat/Kingfisher
 
 ## Feedback
 If you have any questions or suggestions, feel free to open issue just at this project.
